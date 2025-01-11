@@ -20,17 +20,15 @@ class KehadiranController extends Controller
 
     public function store(Request $request)
     {
-    $request->validate([
-        'nama_santri' => 'required',
-        'tanggal' => 'required|date',
-        'status' => 'required',
-    ]);
+        $request->validate([
+            'nama_santri' => 'required',
+            'tanggal' => 'required|date',
+            'status' => 'required',
+        ]);
 
-    Kehadiran::create($request->only(['nama_santri', 'tanggal', 'status']));
-
-    return redirect()->route('kehadiran.index')->with('success', 'Data kehadiran berhasil ditambahkan.');
+        Kehadiran::create($request->all());
+        return redirect()->route('kehadiran.index')->with('success', 'Data kehadiran berhasil ditambahkan.');
     }
-
 
     public function edit(Kehadiran $kehadiran)
     {
